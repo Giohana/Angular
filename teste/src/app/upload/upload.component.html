@@ -1,0 +1,18 @@
+<!-- <p>upload image</p>
+
+<input style="display: none" type="file" (change)="onFileSelected($event)" #fileInput>
+<button type="button" (click)="fileInput.click()">Pick File</button>
+<button type="button" (click)="onUpload()">Carregar</button>
+<img [src]="selectedFile"> -->
+
+<form>
+  <div class="file-field md-form">
+    <div mdbBtn floating="true" size="md" color="amber" mdbWavesEffect>
+      <input type="file" icon="cloud-upload-alt" aria-hidden="true" (change)="onFileSelected($event)">
+    </div>
+  </div>
+</form>
+
+
+
+<!--button type="button" (click)="onUpload()">Carregar</button-->

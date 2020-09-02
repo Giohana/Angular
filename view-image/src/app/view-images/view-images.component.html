@@ -1,0 +1,10 @@
+<h1>View Image</h1>
+<div>
+    <div>
+        <input type="text" [value]="urlImage" (input)="urlImage = $event.target.value">
+    </div>
+    <article>
+        <img [src]="urlImage">
+      </article> 
+
+</div>
