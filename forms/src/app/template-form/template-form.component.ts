@@ -1,8 +1,5 @@
-import { map } from 'rxjs/operators';
-
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-template-form',
@@ -16,10 +13,17 @@ export class TemplateFormComponent implements OnInit {
     email: null
   }
 
-  onSubmit(form) {
-    console.log(form);
+  onSubmit(formulario) {
+    console.log(formulario);
 
     //console.log(this.usuario);
+
+    this.httpClient.post('https://httpbin.org/post', JSON.stringify(formulario.value))
+      .subscribe(dados => {
+        console.log(dados);
+        formulario.form.reset
+      });
+
   }
 
   constructor(private httpClient: HttpClient) { }
@@ -27,7 +31,7 @@ export class TemplateFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  verificaValidTouched(campo){
+  verificaValidTouched(campo) {
     return !campo.valid && campo.touched;
   }
 
@@ -39,16 +43,16 @@ export class TemplateFormComponent implements OnInit {
   }
 
   //webservice = viacep
-  consultaCep(cep, form){
+  consultaCep(cep, form) {
     cep = cep.replace(/\D/g, '');
-    if(cep != ""){
+    if (cep != "") {
       var validacep = /^[0-9]{8}$/;
-      if(validacep.test(cep)){
+      if (validacep.test(cep)) {
         this.resetaDadosForm(form);
         this.httpClient.get(`https://viacep.com.br/ws/${cep}/json`)
-        .subscribe(dados => this.populaDadosForm(dados, form));
+          .subscribe(dados => this.populaDadosForm(dados, form));
       }
-      else{
+      else {
         alert("CEP inválido!");
       }
 
@@ -84,6 +88,7 @@ export class TemplateFormComponent implements OnInit {
     //console.log(formulario);
   }
 
+
   resetaDadosForm(formulario){
     formulario.form.patchValue({
       endereco: {
@@ -96,4 +101,6 @@ export class TemplateFormComponent implements OnInit {
       }
   });
   }
+
+
 }
