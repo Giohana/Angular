@@ -1,3 +1,4 @@
+import { ConsultaCepService } from './../shared/services/consulta-cep.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -26,7 +27,7 @@ export class TemplateFormComponent implements OnInit {
 
   }
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private cepService: ConsultaCepService) { }
 
   ngOnInit(): void {
   }
@@ -45,18 +46,22 @@ export class TemplateFormComponent implements OnInit {
   //webservice = viacep
   consultaCep(cep, form) {
     cep = cep.replace(/\D/g, '');
-    if (cep != "") {
-      var validacep = /^[0-9]{8}$/;
-      if (validacep.test(cep)) {
-        this.resetaDadosForm(form);
-        this.httpClient.get(`https://viacep.com.br/ws/${cep}/json`)
-          .subscribe(dados => this.populaDadosForm(dados, form));
-      }
-      else {
-        alert("CEP inválido!");
-      }
 
+    if(cep != null && cep !== ''){
+      this.cepService.consultaCep(cep).subscribe(dados => this.populaDadosForm(dados, form));
     }
+    // if (cep != "") {
+    //   var validacep = /^[0-9]{8}$/;
+    //   if (validacep.test(cep)) {
+    //     this.resetaDadosForm(form);
+    //     this.httpClient.get(`https://viacep.com.br/ws/${cep}/json`)
+    //       .subscribe(dados => this.populaDadosForm(dados, form));
+    //   }
+    //   else {
+    //     alert("CEP inválido!");
+    //   }
+
+
   }
 
   populaDadosForm(dados, formulario){
