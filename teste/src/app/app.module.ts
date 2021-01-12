@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalTesteComponent } from './modal-teste/modal-teste.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UploadComponent
+    UploadComponent,
+    ModalTesteComponent
   ],
   imports: [
     BrowserModule,

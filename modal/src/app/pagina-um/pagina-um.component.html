@@ -1,0 +1,15 @@
+<div>
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit('FORM')">
+    <input type="text" name="nome" id="nome" placeholder="nome" formControlName="nome">
+    <input type="text" name="email" id="email" placeholder="email" formControlName="email">
+  </form>
+  <button type="submit" (click)="onSubmit('FORM')" >FORM</button>
+</div>
+<div>
+  <form [formGroup]="formTeste" (ngSubmit)="onSubmit('TESTE')">
+    <input type="text" name="sobrenome" id="sobrenome" placeholder="sobrenome" formControlName="sobrenome">
+    <input type="text" name="idade" id="idade" placeholder="idade" placeholder="idade">
+  </form>
+  <button type="submit" (click)="onSubmit('TESTE')" >TESTE</button>
+</div>
+
